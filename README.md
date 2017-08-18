@@ -2,11 +2,11 @@
 
 Commands: 
 
-** my-tweets **
+**my-tweets**
 
     * This will show your last 20 tweets and when they were created at in your terminal/bash window.
     
-**spotify-this-song "song name here" **
+**spotify-this-song "song name here"**
 
     * This will show the following information about the song in your terminal/bash window
     
@@ -19,7 +19,7 @@ Commands:
 	4. The album that the song is from
 	
 		 
-** movie-this "movie name here" ** 
+**movie-this "movie name here"** 
 
      * This will output the following information to your terminal/bash window:
      

@@ -1,7 +1,7 @@
+var keys = require("./keys");
 var fs = require("fs");
 
 var commands = process.argv[2];
-var search = process.argv[3];
 
 switch (commands) {
 	case "my-tweets":
@@ -21,20 +21,47 @@ switch (commands) {
 		break;
 }
 
-// var client = new Twitter ({
-// 	consumer_key: process.env.TWITTER_CONSUMER_KEY,
-// 	consumer_secret: process.env.TWITTER_CONSUMER_SECRET,
-// 	access_token_key: process.env.TWITTER_ACCESS_TOKEN_KEY,
-// 	access_token_secret: process.env.TWITTER_ACCESS_TOKEN_SECRET
-// });
+//=============================================================================
+//                              Twitter
+//=============================================================================
 
-// var Spotify = new Spotify ({
-// 	id: process.env.SPOTIFY_ID,
-// 	secret: process.env.SPOTIFY_SECRET
-// });
+// function twitter() {}
+// 	var client = new Twitter ({
+// 		consumer_key: process.env.TWITTER_CONSUMER_KEY,
+// 		consumer_secret: process.env.TWITTER_CONSUMER_SECRET,
+// 		access_token_key: process.env.TWITTER_ACCESS_TOKEN_KEY,
+// 		access_token_secret: process.env.TWITTER_ACCESS_TOKEN_SECRET
+// 	});
+// }
 
+//=============================================================================
+//                              Spotify
+//=============================================================================
 
-//========== movie-this //==========//
+function spotify() {
+	var Spotify = require("node-spotify-api");
+	var songTitle = process.argv[3];
+	var spotify = new Spotify({
+	  id: process.env.SPOTIFY_ID,
+	  secret: process.env.SPOTIFY_SECRET
+	});
+
+	spotify.search({ type: 'track', query: songTitle, limit: 5 }, (err, data) => {
+	  if (err) {
+	    return console.log('Error occurred: ' + err);
+	  }
+
+	console.log("Artist: " + data.tracks.items[0].artists[0].name);
+	console.log("Song Name: " + data.tracks.items[0].name);
+	console.log("Album: " + data.tracks.items[0].album.name);
+	console.log("Song Preview URL: " + data.tracks.items[0].external_urls.spotify);
+
+	});
+}
+
+//=============================================================================
+//                              OMDB
+//=============================================================================
 
 function omdb() {
 	var request = require("request");
@@ -68,10 +95,10 @@ function omdb() {
 	});
 }
 
-//=======================================//
 
-
-//========== do-what-it-says //==========//
+//=============================================================================
+//                              Do What It Says
+//=============================================================================
 
 function random() {
 	fs.readFile("random.txt", "utf8", function(err, data) {

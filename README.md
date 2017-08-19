@@ -6,7 +6,7 @@ Commands:
 
 **my-tweets**
 
-    * This will show your last 10 tweets and when they were created at in your terminal/bash window.
+    * This will show your last 10 tweets and when they were created in your terminal/bash window.
     
 **spotify-this-song "song name here"**
 

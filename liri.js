@@ -52,6 +52,12 @@ function twitter() {
 				console.log("==========================================");
 			}
 
+			fs.appendFile("log.txt", fileData, function (err) {
+				if(err) {
+					throw console.log(err);
+				}
+			});
+
 		}
 	});
 }
@@ -79,9 +85,19 @@ function spotify() {
 	console.log("Song Name: " + data.tracks.items[0].name);
 	console.log("Album: " + data.tracks.items[0].album.name);
 	console.log("Song Preview URL: " + data.tracks.items[0].external_urls.spotify);
-
+	
+	var fileData = "Artist: " + data.tracks.items[0].artists[0].name +
+					"\nSong Name: " + data.tracks.items[0].name +
+					"\nAlbum: " + data.tracks.items[0].album.name +
+					"\nSong Preview URL: " + data.tracks.items[0].external_urls.spotify + 
+	
+	fs.appendFile("log.txt", fileData, function(err) {
+		if (err) {
+			return console.log(err);
+		}
 	});
-}
+	})
+};
 
 
 //=============================================================================
@@ -117,10 +133,24 @@ function omdb() {
 			console.log("Language: " + JSON.parse(body).Language);
 			console.log("Plot: " + JSON.parse(body).Plot);
 			console.log("Actors: " + JSON.parse(body).Actors);
+	
+		var fileData = "Title: " + JSON.parse(body).Title +
+						"\nRelease Year: " + JSON.parse(body).Year +
+						"\nIMDB Rating: " + JSON.parse(body).imdbRating +
+						"\nRotten Tomatoes Rating: " + JSON.parse(body).Ratings[1].Value +
+						"\nCountry: " + JSON.parse(body).Country +
+						"\nLanguage: " + JSON.parse(body).Language +
+						"\nPlot: " + JSON.parse(body).Plot +
+						"\nActors: " + JSON.parse(body).Actors;
 
+		fs.appendFile("log.txt", fileData, function(err) {
+			if (err) {
+				return console.log(err);
+			}
+		});
 		}
-	});
-}
+	})
+};
 
 
 //=============================================================================
@@ -145,4 +175,4 @@ function random() {
 		console.log("==========================================");
 		console.log(result);
 	})
-}
+};
